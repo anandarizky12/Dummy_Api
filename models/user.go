@@ -10,7 +10,7 @@ type User struct {
 	Age  int `json:"age" form:age`
 	Power int `json:"power" form:power`
 	Tier string `json:"tier" form:tier`
-	Abilities []string `json:"abilities" form:abilities`
+	Abilities string `json:"abilities" form:abilities`
 	Image string `json:"image" form:image`
 	CreatedAt time.Time
 	UpdatedAt time.Time 
