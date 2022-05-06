@@ -5,7 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"dummy_api/models"	
 	"dummy_api/config"
-	"fmt"
+	// "fmt"
 	
 )
 
@@ -72,8 +72,6 @@ func UserPostRoute(c *gin.Context){
 }
 
 func CreateUserController(c *gin.Context ){
-	
-
 	var input User
 	err := c.ShouldBindJSON(&input)
 	if err != nil {
@@ -90,17 +88,18 @@ func CreateUserController(c *gin.Context ){
 		Power : input.Power,
 	}
 
-	err = config.DB.Create(&user).Error
+	config.DB.Create(&user)
 
 	if err != nil {
-		 fmt.Println("===========================================")
-		 fmt.Println("Terjadi Keeroran pada saat menyimpan data")
-	}
-
+		c.JSON(http.StatusBadRequest, gin.H{
+				"errors" : err,
+			})
+	}	
 	c.JSON(http.StatusOK, gin.H{
 		"name" : user.Name,
 		"age" : user.Age,
 		"power" : user.Power,
 	})
+
 
 }
