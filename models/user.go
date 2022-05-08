@@ -1,17 +1,19 @@
-package models 
+package models
 
-import ("gorm.io/gorm"
-"time"
+import (
+	"time"
+
+	"gorm.io/gorm"
 )
 
 type User struct {
 	gorm.Model
-	Name  string `json:"name" form:"name"`
-	Age  int `json:"age" form:age`
-	Power int `json:"power" form:power`
-	Tier string `json:"tier" form:tier`
+	Name      string `json:"name" form:"name"`
+	Age       int    `json:"age" form:age`
+	Power     int    `json:"power" form:power`
+	Tier      string `json:"tier" form:tier`
 	Abilities string `json:"abilities" form:abilities`
-	Image string `json:"image" form:image`
+	Image     string `json:"image" form:image`
 	CreatedAt time.Time
-	UpdatedAt time.Time 
+	UpdatedAt time.Time
 }

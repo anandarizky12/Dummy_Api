@@ -8,24 +8,6 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func RootMain(c *gin.Context) {
-	c.JSON(http.StatusOK, gin.H{
-		"message": "Hello World",
-		"status":  http.StatusOK,
-	})
-}
-
-// func UserRoute(c *gin.Context) {
-// 	c.JSON(http.StatusOK, gin.H{
-// 		"name":      "Gohan Gin Goku",
-// 		"age":       "20",
-// 		"power":     "4000K",
-// 		"tier":      "B",
-// 		"abilities": []string{"Super Saiyan", "Super Saiyan 2", "Super Saiyan 3", "Super Saiyan 4"},
-// 		"image":     "https://images5.alphacoders.com/610/610758.png",
-// 	})
-// }
-
 type UserInput struct {
 	Name  string `json:"name" binding:"required"`
 	Age   int    `json:"age"`
