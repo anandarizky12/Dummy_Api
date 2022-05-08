@@ -26,7 +26,7 @@ func RootMain(c *gin.Context) {
 // 	})
 // }
 
-type User struct {
+type UserInput struct {
 	Name  string `json:"name" binding:"required"`
 	Age   int    `json:"age"`
 	Power int    `json:"power"`
@@ -108,4 +108,45 @@ func DeleteUserController(c *gin.Context) {
 		"data":    user,
 		"message": "Succesfully Deleted The data",
 	})
+}
+
+func UpdateUserController(c *gin.Context) {
+	var user models.User
+
+	id := c.Param("id")
+
+	err := config.DB.Where("id = ?", id).First(&user).Error
+
+	if err != nil {
+		c.JSON(http.StatusBadGateway, gin.H{
+			"error": "data not found",
+		})
+		return
+	}
+
+	// var input UserInput
+
+	err = c.ShouldBindJSON(&user)
+
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
+
+	config.DB.Updates(user)
+
+	// if err != nil {
+	// 	c.JSON(http.StatusBadRequest, gin.H{
+	// 		"error": err.Error(),
+	// 	})
+	// 	return
+	// }
+
+	c.JSON(http.StatusOK, gin.H{
+		"data":    user,
+		"message": "success Update data",
+	})
+
 }
